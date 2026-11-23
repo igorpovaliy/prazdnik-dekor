@@ -7,106 +7,157 @@
 <meta name="description" content="Декор свадеб, дней рождения и корпоративов в Москве и области. Идея, подбор декора, монтаж и демонтаж под ключ.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --cream:#fbf6f1; --blush:#f3d9d3; --rose:#d9837a; --rose-dark:#b8625a;
     --gold:#c9a35b; --ink:#2f2522; --muted:#6f625d; --white:#fff;
-    --radius:22px; --shadow:0 18px 40px -18px rgba(90,50,40,.25);
+    --radius:22px; --shadow:0 18px 40px -18px rgba(90,50,40,.3);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:80px}
+  html,body{overflow-x:hidden}
   body{font-family:Manrope,system-ui,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6;font-size:17px}
-  h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.15}
+  h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.12}
+  img{display:block;max-width:100%}
   a{color:inherit}
-  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
-  section{padding:96px 0}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  section{padding:100px 0}
   .eyebrow{display:inline-block;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--rose-dark);font-weight:700;margin-bottom:14px}
-  .sec-title{font-size:clamp(34px,4.5vw,52px);margin-bottom:14px}
-  .sec-sub{color:var(--muted);max-width:620px;margin-bottom:48px}
-  .btn{display:inline-block;background:var(--rose);color:#fff;text-decoration:none;font-weight:700;padding:17px 34px;border-radius:999px;border:0;cursor:pointer;font-size:16px;font-family:inherit;box-shadow:0 12px 26px -10px rgba(217,131,122,.8);transition:.2s}
+  .sec-title{font-size:clamp(34px,4.5vw,54px);margin-bottom:14px}
+  .sec-sub{color:var(--muted);max-width:620px;margin-bottom:50px}
+  .btn{display:inline-block;background:var(--rose);color:#fff;text-decoration:none;font-weight:700;padding:17px 34px;border-radius:999px;border:0;cursor:pointer;font-size:16px;font-family:inherit;box-shadow:0 12px 26px -10px rgba(217,131,122,.85);transition:.25s;text-align:center}
   .btn:hover{background:var(--rose-dark);transform:translateY(-2px)}
   .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);box-shadow:none}
   .btn-ghost:hover{background:var(--ink);color:#fff}
+  .btn-light{background:#fff;color:var(--ink);box-shadow:none}
+  .btn-light:hover{background:var(--blush);color:var(--ink)}
 
-  /* header */
-  header{position:sticky;top:0;z-index:50;background:rgba(251,246,241,.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(47,37,34,.07)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
-  .logo{font-family:"Cormorant Garamond",serif;font-size:28px;font-weight:700;text-decoration:none}
-  .logo span{color:var(--rose)}
-  .menu{display:flex;gap:30px;font-size:15px;font-weight:600}
-  .menu a{text-decoration:none;opacity:.8}
-  .menu a:hover{opacity:1;color:var(--rose-dark)}
-  .phone{font-weight:700;text-decoration:none;font-size:15px}
+  /* появление при прокрутке */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.on{opacity:1;transform:none}
 
-  /* hero */
-  .hero{position:relative;overflow:hidden;padding:80px 0 110px;background:radial-gradient(ellipse at 80% 20%,#f7e3dc 0,transparent 55%),radial-gradient(ellipse at 10% 90%,#f6ead9 0,transparent 50%)}
-  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-  .hero h1{font-size:clamp(42px,6vw,76px);margin-bottom:24px}
-  .hero h1 em{font-style:italic;color:var(--rose)}
-  .hero p{font-size:19px;color:var(--muted);max-width:540px;margin-bottom:36px}
+  /* шапка */
+  header{position:fixed;top:0;left:0;right:0;z-index:60;transition:.3s}
+  header.solid{background:rgba(251,246,241,.94);backdrop-filter:blur(10px);box-shadow:0 4px 20px -12px rgba(0,0,0,.25)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .logo{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:700;text-decoration:none;color:#fff;transition:.3s}
+  .logo span{color:var(--blush)}
+  header.solid .logo{color:var(--ink)}
+  header.solid .logo span{color:var(--rose)}
+  .menu{display:flex;gap:32px;font-size:15px;font-weight:600}
+  .menu a{text-decoration:none;color:#fff;opacity:.9;transition:.2s}
+  header.solid .menu a{color:var(--ink)}
+  .menu a:hover{opacity:1;color:var(--gold)!important}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  .phone{font-weight:700;text-decoration:none;font-size:15px;color:#fff}
+  header.solid .phone{color:var(--ink)}
+  .nav .btn{padding:11px 22px;font-size:14px}
+  .burger{display:none;width:44px;height:44px;border:0;background:rgba(255,255,255,.2);border-radius:12px;cursor:pointer;position:relative}
+  header.solid .burger{background:var(--blush)}
+  .burger span,.burger span::before,.burger span::after{position:absolute;left:12px;width:20px;height:2px;background:#fff;content:"";transition:.3s}
+  header.solid .burger span,header.solid .burger span::before,header.solid .burger span::after{background:var(--ink)}
+  .burger span{top:21px}.burger span::before{left:0;top:-6px}.burger span::after{left:0;top:6px}
+  .mob-menu{display:none;position:fixed;inset:0;background:var(--ink);z-index:70;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+  .mob-menu.open{display:flex}
+  .mob-menu a{color:#fff;text-decoration:none;font-family:"Cormorant Garamond",serif;font-size:34px}
+  .mob-menu .close{position:absolute;top:18px;right:22px;background:none;border:0;color:#fff;font-size:40px;cursor:pointer;line-height:1}
+
+  /* первый экран */
+  .hero{position:relative;min-height:min(100vh,920px);display:flex;align-items:center;color:#fff;padding:140px 0 100px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1769812344081-92b3e2ac39c0?w=2000&q=80&auto=format&fit=crop") center/cover;transform:scale(1.06);animation:zoom 18s ease-out forwards}
+  @keyframes zoom{to{transform:scale(1)}}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(35,22,20,.82) 0%,rgba(35,22,20,.55) 45%,rgba(35,22,20,.15) 100%)}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .hero .eyebrow{color:var(--blush)}
+  .hero h1{font-size:clamp(40px,6.2vw,80px);margin-bottom:24px;max-width:780px}
+  .hero h1 em{color:#f4c1b8}
+  .hero p{font-size:19px;color:#f1e6e2;max-width:540px;margin-bottom:38px}
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-  .facts{display:flex;gap:36px;margin-top:48px;flex-wrap:wrap}
-  .facts b{display:block;font-family:"Cormorant Garamond",serif;font-size:38px;color:var(--rose-dark);line-height:1}
-  .facts span{font-size:14px;color:var(--muted)}
-  /* декоративная композиция из шаров */
-  .balloons{position:relative;height:520px}
-  .b{position:absolute;border-radius:50% 50% 48% 52%/55% 55% 45% 45%;box-shadow:inset -18px -22px 40px rgba(0,0,0,.12),inset 14px 14px 30px rgba(255,255,255,.55)}
-  .b::after{content:"";position:absolute;left:50%;bottom:-9px;width:12px;height:12px;transform:translateX(-50%) rotate(45deg);background:inherit;border-radius:2px}
-  .b1{width:230px;height:250px;background:#e8a29a;left:18%;top:40px;animation:float 7s ease-in-out infinite}
-  .b2{width:170px;height:185px;background:#f3d9d3;left:58%;top:0;animation:float 6s ease-in-out infinite .8s}
-  .b3{width:190px;height:205px;background:#d8b46e;left:52%;top:200px;animation:float 8s ease-in-out infinite .3s}
-  .b4{width:140px;height:152px;background:#fff;left:6%;top:270px;animation:float 6.5s ease-in-out infinite 1.2s}
-  .b5{width:110px;height:120px;background:#c97c73;left:34%;top:330px;animation:float 7.5s ease-in-out infinite .5s}
-  .arch{position:absolute;left:8%;right:4%;bottom:0;height:120px;border:3px solid var(--gold);border-bottom:0;border-radius:300px 300px 0 0;opacity:.55}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  .hero .btn-ghost{color:#fff;border-color:#fff}
+  .hero .btn-ghost:hover{background:#fff;color:var(--ink)}
+  .facts{display:flex;gap:44px;margin-top:60px;flex-wrap:wrap}
+  .facts b{display:block;font-family:"Cormorant Garamond",serif;font-size:42px;color:#fff;line-height:1}
+  .facts span{font-size:14px;color:#e6d8d3}
+  .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:2;width:26px;height:42px;border:2px solid rgba(255,255,255,.7);border-radius:20px}
+  .scroll-hint::after{content:"";position:absolute;left:50%;top:8px;width:4px;height:8px;margin-left:-2px;background:#fff;border-radius:2px;animation:sh 1.6s infinite}
+  @keyframes sh{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(14px)}}
 
-  /* directions */
+  /* направления */
   .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-  .card{background:var(--white);border-radius:var(--radius);padding:34px 28px;box-shadow:var(--shadow);transition:.25s}
-  .card:hover{transform:translateY(-6px)}
-  .card .ic{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;margin-bottom:22px;background:var(--blush)}
-  .card .ic svg{width:28px;height:28px;stroke:var(--rose-dark);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .card h3{font-size:28px;margin-bottom:10px}
-  .card p{color:var(--muted);font-size:15.5px}
+  .card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:.35s;text-decoration:none;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-8px);box-shadow:0 28px 50px -20px rgba(90,50,40,.4)}
+  .card .ph{height:230px;overflow:hidden}
+  .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+  .card:hover .ph img{transform:scale(1.08)}
+  .card .tx{padding:26px 26px 30px;flex:1;display:flex;flex-direction:column}
+  .card h3{font-size:29px;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:15.5px;flex:1}
+  .card .more{margin-top:16px;color:var(--rose-dark);font-weight:700;font-size:14px}
 
-  /* gallery */
-  .gallery{background:var(--white)}
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:16px}
-  .tile{border-radius:18px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:18px;color:#fff;font-weight:700;font-size:15px}
-  .tile::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.35) 0 18%,transparent 19%),radial-gradient(circle at 70% 55%,rgba(255,255,255,.25) 0 12%,transparent 13%),radial-gradient(circle at 45% 75%,rgba(255,255,255,.2) 0 9%,transparent 10%)}
-  .tile span{position:relative;background:rgba(0,0,0,.18);padding:6px 12px;border-radius:999px;backdrop-filter:blur(4px)}
-  .t1{grid-column:span 2;grid-row:span 2;background:linear-gradient(135deg,#e8a29a,#c97c73)}
-  .t2{background:linear-gradient(135deg,#d8b46e,#b8925a)}
-  .t3{background:linear-gradient(135deg,#f0c9c2,#d9837a)}
-  .t4{grid-row:span 2;background:linear-gradient(160deg,#9bb5a3,#6f8f7b)}
-  .t5{grid-row:span 2;background:linear-gradient(135deg,#c9b3d9,#9a7fb3)}
-  .t6{grid-column:span 2;background:linear-gradient(135deg,#f3d9d3,#d8b46e)}
-  .demo-note{margin-top:18px;font-size:14px;color:var(--muted)}
+  /* преимущества */
+  .why{background:var(--white)}
+  .why .wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .why-img{position:relative}
+  .why-img img{border-radius:var(--radius);width:100%;height:560px;object-fit:cover}
+  .why-img .tag{position:absolute;right:-20px;bottom:40px;background:var(--rose);color:#fff;padding:22px 26px;border-radius:18px;box-shadow:var(--shadow)}
+  .why-img .tag b{font-family:"Cormorant Garamond",serif;font-size:40px;display:block;line-height:1}
+  .why-list{display:grid;gap:26px;margin-top:10px}
+  .why-item{display:flex;gap:18px}
+  .why-item i{flex:none;width:48px;height:48px;border-radius:14px;background:var(--blush);display:grid;place-items:center;font-style:normal;color:var(--rose-dark);font-weight:700}
+  .why-item h3{font-family:Manrope,sans-serif;font-size:18px;font-weight:700;margin-bottom:4px}
+  .why-item p{color:var(--muted);font-size:15.5px}
 
-  /* prices */
+  /* галерея */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;gap:14px}
+  .tile{border-radius:18px;overflow:hidden;position:relative;cursor:zoom-in;border:0;padding:0;background:#eee}
+  .tile img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+  .tile:hover img{transform:scale(1.07)}
+  .tile span{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.92);color:var(--ink);font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;opacity:0;transform:translateY(8px);transition:.3s}
+  .tile:hover span{opacity:1;transform:none}
+  .g1{grid-column:span 2;grid-row:span 2}
+  .grid{grid-auto-flow:dense}
+  .g7{grid-column:span 2}
+  .lightbox{position:fixed;inset:0;background:rgba(20,14,13,.94);z-index:80;display:none;align-items:center;justify-content:center;padding:30px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:92vw;max-height:84vh;border-radius:12px}
+  .lightbox p{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#fff;font-weight:600}
+  .lb-btn{position:absolute;background:rgba(255,255,255,.12);border:0;color:#fff;width:54px;height:54px;border-radius:50%;font-size:26px;cursor:pointer}
+  .lb-btn:hover{background:var(--rose)}
+  .lb-close{top:20px;right:20px}.lb-prev{left:20px;top:50%;margin-top:-27px}.lb-next{right:20px;top:50%;margin-top:-27px}
+
+  /* цены */
+  .prices-sec{background:linear-gradient(180deg,var(--cream),#f6e7df)}
   .prices{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
-  .price{background:var(--white);border-radius:var(--radius);padding:40px 34px;box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative}
+  .price{background:var(--white);border-radius:var(--radius);padding:42px 34px;box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;transition:.3s}
+  .price:hover{transform:translateY(-6px)}
   .price.hot{background:var(--ink);color:#fff;transform:scale(1.04)}
+  .price.hot:hover{transform:scale(1.04) translateY(-6px)}
   .price.hot li{color:#e9dfda}
   .badge{position:absolute;top:-14px;left:34px;background:var(--gold);color:#fff;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
-  .price h3{font-size:32px}
-  .price .sum{font-family:"Cormorant Garamond",serif;font-size:44px;font-weight:700;color:var(--rose);margin:8px 0 22px}
+  .price h3{font-size:34px}
+  .price .sum{font-family:"Cormorant Garamond",serif;font-size:46px;font-weight:700;color:var(--rose);margin:6px 0 22px}
   .price ul{list-style:none;margin-bottom:30px;flex:1}
   .price li{padding:8px 0 8px 28px;position:relative;color:var(--muted);font-size:15.5px}
   .price li::before{content:"";position:absolute;left:0;top:15px;width:14px;height:8px;border-left:2px solid var(--rose);border-bottom:2px solid var(--rose);transform:rotate(-45deg)}
-  .price .btn{text-align:center}
 
-  /* steps */
-  .steps-sec{background:linear-gradient(180deg,var(--cream),#f6e7df)}
+  /* этапы */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:s}
-  .step{position:relative;padding-top:70px}
-  .step::before{counter-increment:s;content:"0" counter(s);position:absolute;top:0;left:0;font-family:"Cormorant Garamond",serif;font-size:64px;font-weight:700;color:var(--rose);opacity:.35;line-height:1}
+  .step{position:relative;background:var(--white);border-radius:var(--radius);padding:84px 26px 30px;box-shadow:var(--shadow)}
+  .step::before{counter-increment:s;content:"0" counter(s);position:absolute;top:22px;left:26px;font-family:"Cormorant Garamond",serif;font-size:56px;font-weight:700;color:var(--rose);opacity:.45;line-height:1}
   .step h3{font-size:26px;margin-bottom:8px}
   .step p{color:var(--muted);font-size:15.5px}
 
-  /* faq */
-  .faq{max-width:820px}
+  /* баннер */
+  .banner{position:relative;padding:120px 0;color:#fff;text-align:center;overflow:hidden}
+  .banner::before{content:"";position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1769812343353-ae6ca1250bc2?w=2000&q=80&auto=format&fit=crop") center/cover fixed}
+  .banner::after{content:"";position:absolute;inset:0;background:rgba(35,22,20,.66)}
+  .banner .wrap{position:relative;z-index:2}
+  .banner h2{font-size:clamp(34px,5vw,60px);margin-bottom:18px}
+  .banner p{color:#eee2de;max-width:600px;margin:0 auto 34px;font-size:18px}
+
+  /* вопросы */
+  .faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start}
   details{background:var(--white);border-radius:16px;margin-bottom:12px;padding:22px 28px;box-shadow:0 6px 18px -12px rgba(90,50,40,.25)}
   summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:20px;font-size:17px}
   summary::-webkit-details-marker{display:none}
@@ -114,207 +165,258 @@
   details[open] summary::after{transform:rotate(45deg)}
   details p{margin-top:12px;color:var(--muted)}
 
-  /* form */
+  /* форма */
   .form-sec{background:var(--ink);color:#fff;position:relative;overflow:hidden}
-  .form-sec::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:var(--rose);opacity:.18;right:-120px;top:-140px}
+  .form-sec::before{content:"";position:absolute;width:460px;height:460px;border-radius:50%;background:var(--rose);opacity:.18;right:-140px;top:-160px}
   .form-sec .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative}
   .form-sec .sec-sub{color:#d9cdc8}
   .form-sec .eyebrow{color:var(--gold)}
-  form{background:#fff;color:var(--ink);border-radius:var(--radius);padding:36px;display:grid;gap:14px}
+  .contacts-list{display:grid;gap:14px;margin-top:10px}
+  .contacts-list a{text-decoration:none;font-weight:600;display:flex;align-items:center;gap:12px}
+  .contacts-list a:hover{color:var(--gold)}
+  .contacts-list i{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:700}
+  form{background:#fff;color:var(--ink);border-radius:var(--radius);padding:38px}
+  .fields{display:grid;gap:14px}
   input,select{width:100%;font:inherit;font-size:16px;padding:15px 18px;border:1.5px solid #e6dcd7;border-radius:14px;background:var(--cream);color:var(--ink)}
   input:focus,select:focus{outline:none;border-color:var(--rose)}
   form .btn{width:100%;margin-top:6px}
   .agree{font-size:12.5px;color:var(--muted)}
-  .thanks{display:none;text-align:center;padding:30px 10px}
-  .thanks h3{font-size:34px;margin-bottom:8px}
+  .thanks{display:none;text-align:center;padding:40px 10px}
+  .thanks h3{font-size:38px;margin-bottom:8px}
 
-  /* footer */
-  footer{background:#241c1a;color:#cbbfba;padding:56px 0 34px;font-size:15px}
-  .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:34px}
+  /* подвал */
+  footer{background:#241c1a;color:#cbbfba;padding:56px 0 30px;font-size:15px}
+  .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:30px}
   footer .logo{color:#fff}
   footer a{text-decoration:none}
-  .soc{display:flex;gap:12px;margin-top:10px}
+  footer a:hover{color:#fff}
+  .foot-menu{display:flex;gap:22px;flex-wrap:wrap}
+  .soc{display:flex;gap:12px;margin-top:12px}
   .soc a{width:42px;height:42px;border-radius:50%;border:1px solid #4a3d39;display:grid;place-items:center;font-size:13px;font-weight:700}
   .soc a:hover{background:var(--rose);border-color:var(--rose);color:#fff}
-  .demo{border-top:1px solid #3a2f2c;padding-top:22px;font-size:13px;color:#8f817c}
+  .demo{border-top:1px solid #3a2f2c;padding-top:20px;font-size:13px;color:#8f817c}
 
-  /* mobile */
-  @media (max-width:960px){
-    .menu{display:none}
-    .hero .wrap,.form-sec .wrap{grid-template-columns:1fr}
-    .balloons{height:340px;order:-1}
-    .b1{width:160px;height:175px}.b2{width:120px;height:130px}.b3{width:135px;height:148px;top:140px}.b4{width:100px;height:110px;top:190px}.b5{width:80px;height:88px;top:230px}
-    .arch{height:80px}
+  /* плавающая кнопка */
+  .float{position:fixed;right:22px;bottom:22px;z-index:55;width:62px;height:62px;border-radius:50%;background:var(--rose);display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(217,131,122,.9);animation:pulse 2.4s infinite;text-decoration:none}
+  .float svg{width:28px;height:28px;fill:#fff}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(217,131,122,.6)}70%{box-shadow:0 0 0 18px rgba(217,131,122,0)}100%{box-shadow:0 0 0 0 rgba(217,131,122,0)}}
+
+  /* адаптив */
+  @media (max-width:1000px){
+    .menu,.nav .btn,.phone{display:none}
+    .burger{display:block}
     .cards,.steps{grid-template-columns:1fr 1fr}
+    .why .wrap,.form-sec .wrap,.faq-wrap{grid-template-columns:1fr;gap:40px}
+    .why-img img{height:380px}
+    .why-img .tag{right:16px}
     .prices{grid-template-columns:1fr}
-    .price.hot{transform:none}
-    .grid{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
-    .t6{grid-column:span 2}.t4,.t5{grid-row:span 1}
+    .price.hot,.price.hot:hover{transform:none}
+    .grid{grid-template-columns:1fr 1fr;grid-auto-rows:170px}
+    .g1,.g7{grid-column:span 2}
+    .g4{grid-row:span 1}
+    .banner::before{background-attachment:scroll}
   }
-  .hero .wrap>*,.form-sec .wrap>*{min-width:0}
-  .balloons{overflow:hidden}
-  html,body{overflow-x:hidden}
   @media (max-width:560px){
-    .hero h1{font-size:36px;overflow-wrap:break-word}
-    .sec-title{font-size:32px}
-    .b2{left:auto;right:4%}
     body{font-size:16px}
     section{padding:70px 0}
-    .phone{display:none}
+    .hero{padding:120px 0 90px}
+    .hero h1{font-size:34px;overflow-wrap:anywhere}
+    .facts{gap:26px}
+    .facts b{font-size:32px}
     .cards,.steps{grid-template-columns:1fr}
-    .hero{padding:40px 0 70px}
     form{padding:26px}
+    .lb-prev,.lb-next{top:auto;bottom:60px;margin:0}
   }
 </style>
 </head>
 <body>
 
-<header>
+<header id="hdr">
   <div class="wrap nav">
     <a href="#top" class="logo">Праздник <span>Декор</span></a>
     <nav class="menu">
       <a href="#services">Услуги</a>
       <a href="#works">Работы</a>
       <a href="#prices">Цены</a>
+      <a href="#steps">Как работаем</a>
       <a href="#faq">Вопросы</a>
-      <a href="#contact">Контакты</a>
     </nav>
-    <a href="tel:+79000000000" class="phone">+7 (900) 000-00-00</a>
+    <div class="nav-right">
+      <a href="tel:+79000000000" class="phone">+7 (900) 000-00-00</a>
+      <a href="#contact" class="btn">Оставить заявку</a>
+      <button class="burger" aria-label="Меню" onclick="toggleMenu(true)"><span></span></button>
+    </div>
   </div>
 </header>
 
+<div class="mob-menu" id="mobMenu">
+  <button class="close" aria-label="Закрыть" onclick="toggleMenu(false)">×</button>
+  <a href="#services">Услуги</a>
+  <a href="#works">Работы</a>
+  <a href="#prices">Цены</a>
+  <a href="#steps">Как работаем</a>
+  <a href="#faq">Вопросы</a>
+  <a href="#contact" class="btn" style="font-family:Manrope,sans-serif;font-size:17px">Оставить заявку</a>
+</div>
+
 <section class="hero" id="top">
+  <div class="hero-bg"></div>
   <div class="wrap">
-    <div>
-      <span class="eyebrow">Студия декора · Москва и область</span>
-      <h1>Оформим ваш праздник так, что гости будут <em>фотографировать каждый уголок</em></h1>
-      <p>Декор свадеб, дней рождения и корпоративов. Идея, подбор декора, монтаж и демонтаж — под ключ.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn">Обсудить мероприятие</a>
-        <a href="#prices" class="btn btn-ghost">Смотреть цены</a>
-      </div>
-      <div class="facts">
-        <div><b>под ключ</b><span>от идеи до демонтажа</span></div>
-        <div><b>1 час</b><span>перезвоним после заявки</span></div>
-        <div><b>0 ₽</b><span>консультация и идеи</span></div>
-      </div>
+    <span class="eyebrow">Студия декора · Москва и область</span>
+    <h1>Оформим ваш праздник так, что гости будут <em>фотографировать каждый уголок</em></h1>
+    <p>Декор свадеб, дней рождения и корпоративов. Идея, подбор декора, монтаж и демонтаж — под ключ.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn">Обсудить мероприятие</a>
+      <a href="#works" class="btn btn-ghost">Смотреть работы</a>
     </div>
-    <div class="balloons" aria-hidden="true">
-      <div class="arch"></div>
-      <div class="b b2"></div><div class="b b1"></div><div class="b b3"></div><div class="b b4"></div><div class="b b5"></div>
+    <div class="facts">
+      <div><b>под ключ</b><span>от идеи до демонтажа</span></div>
+      <div><b>1 час</b><span>перезвоним после заявки</span></div>
+      <div><b>0 ₽</b><span>консультация и идеи</span></div>
     </div>
   </div>
+  <a href="#services" class="scroll-hint" aria-label="Листать вниз"></a>
 </section>
 
 <section id="services">
   <div class="wrap">
-    <span class="eyebrow">Направления</span>
-    <h2 class="sec-title">Что мы оформляем</h2>
-    <p class="sec-sub">Берём на себя всё оформление — вы занимаетесь гостями и праздником.</p>
+    <div class="reveal">
+      <span class="eyebrow">Направления</span>
+      <h2 class="sec-title">Что мы оформляем</h2>
+      <p class="sec-sub">Берём на себя всё оформление — вы занимаетесь гостями и праздником.</p>
+    </div>
     <div class="cards">
-      <div class="card">
-        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div>
-        <h3>Свадьбы</h3>
-        <p>Арки, президиум, столы гостей, выездная регистрация. Создаём атмосферу, в которой хочется остаться навсегда.</p>
-      </div>
-      <div class="card">
-        <div class="ic"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="9" rx="6" ry="7"/><path d="M12 16v6M10.5 16h3"/></svg></div>
-        <h3>Частные праздники</h3>
-        <p>Дни рождения, юбилеи, детские праздники, гендер-пати. Шары, цветы, тематический декор.</p>
-      </div>
-      <div class="card">
-        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></div>
-        <h3>Корпоративы</h3>
-        <p>Новогодние вечеринки, юбилеи компаний, презентации. Оформление в фирменном стиле.</p>
-      </div>
-      <div class="card">
-        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="4"/><path d="M8 6l1.5-3h5L16 6"/></svg></div>
-        <h3>Фотозоны</h3>
-        <p>Яркие фотозоны под любой праздник: с цветами, шарами, неоновыми надписями и вашим логотипом.</p>
+      <a href="#contact" class="card reveal" data-type="Свадьба">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1769812343890-4e406a33cfbe?w=700&q=75&auto=format&fit=crop" alt="Свадебная арка с цветами" loading="lazy"></div>
+        <div class="tx"><h3>Свадьбы</h3><p>Арки, президиум, столы гостей, выездная регистрация. Создаём атмосферу, в которой хочется остаться навсегда.</p><span class="more">Обсудить свадьбу →</span></div>
+      </a>
+      <a href="#contact" class="card reveal" data-type="День рождения">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=700&q=75&auto=format&fit=crop" alt="Разноцветные воздушные шары" loading="lazy"></div>
+        <div class="tx"><h3>Частные праздники</h3><p>Дни рождения, юбилеи, детские праздники, гендер-пати. Шары, цветы, тематический декор.</p><span class="more">Обсудить праздник →</span></div>
+      </a>
+      <a href="#contact" class="card reveal" data-type="Корпоратив">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=700&q=75&auto=format&fit=crop" alt="Банкетный зал" loading="lazy"></div>
+        <div class="tx"><h3>Корпоративы</h3><p>Новогодние вечеринки, юбилеи компаний, презентации. Оформление в фирменном стиле.</p><span class="more">Обсудить корпоратив →</span></div>
+      </a>
+      <a href="#contact" class="card reveal" data-type="Фотозона">
+        <div class="ph"><img src="https://images.unsplash.com/photo-1768404768678-1597773abd28?w=700&q=75&auto=format&fit=crop" alt="Стена из роз для фотозоны" loading="lazy"></div>
+        <div class="tx"><h3>Фотозоны</h3><p>Яркие фотозоны под любой праздник: с цветами, шарами, неоновыми надписями и вашим логотипом.</p><span class="more">Заказать фотозону →</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="why-img reveal">
+      <img src="https://images.unsplash.com/photo-1529636798458-92182e662485?w=1000&q=75&auto=format&fit=crop" alt="Цветочное оформление арки" loading="lazy">
+      <div class="tag"><b>под ключ</b>от идеи до уборки</div>
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">Почему мы</span>
+      <h2 class="sec-title">Праздник без хлопот — для вас и ваших гостей</h2>
+      <div class="why-list">
+        <div class="why-item"><i>01</i><div><h3>Идея под ваш бюджет</h3><p>Предложим 2–3 варианта оформления и честно скажем, на чём можно сэкономить.</p></div></div>
+        <div class="why-item"><i>02</i><div><h3>Смета без сюрпризов</h3><p>Фиксируем стоимость в договоре — итоговая сумма не вырастет в день праздника.</p></div></div>
+        <div class="why-item"><i>03</i><div><h3>Монтаж заранее</h3><p>Приезжаем за несколько часов до начала: к приходу гостей всё готово.</p></div></div>
+        <div class="why-item"><i>04</i><div><h3>Сами всё уберём</h3><p>После праздника аккуратно разбираем декор и увозим его — вам ничего делать не нужно.</p></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="gallery" id="works">
+<section id="works">
   <div class="wrap">
-    <span class="eyebrow">Портфолио</span>
-    <h2 class="sec-title">Наши оформления</h2>
-    <p class="sec-sub">Каждый праздник — уникальный. Вот несколько последних работ.</p>
-    <div class="grid">
-      <div class="tile t1"><span>Свадьба в пудровых тонах</span></div>
-      <div class="tile t2"><span>Юбилей 50 лет</span></div>
-      <div class="tile t3"><span>Детский день рождения</span></div>
-      <div class="tile t4"><span>Выездная регистрация</span></div>
-      <div class="tile t5"><span>Гендер-пати</span></div>
-      <div class="tile t6"><span>Новогодний корпоратив</span></div>
+    <div class="reveal">
+      <span class="eyebrow">Портфолио</span>
+      <h2 class="sec-title">Наши оформления</h2>
+      <p class="sec-sub">Каждый праздник — уникальный. Нажмите на фото, чтобы посмотреть крупнее.</p>
     </div>
-    <p class="demo-note">В демо-версии вместо фотографий стоят заглушки — на рабочем сайте здесь будут реальные фото ваших оформлений.</p>
+    <div class="grid reveal" id="gallery">
+      <button class="tile g1"><img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=1200&q=75&auto=format&fit=crop" alt="Банкетный стол с цветами" loading="lazy"><span>Банкетный стол</span></button>
+      <button class="tile g2"><img src="https://images.unsplash.com/photo-1641834919507-b0271fe5186b?w=700&q=75&auto=format&fit=crop" alt="Свадебная арка" loading="lazy"><span>Свадебная арка</span></button>
+      <button class="tile g3"><img src="https://images.unsplash.com/photo-1583875762487-5f8f7c718d14?w=700&q=75&auto=format&fit=crop" alt="Шары на день рождения" loading="lazy"><span>День рождения</span></button>
+      <button class="tile g4"><img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=700&q=75&auto=format&fit=crop" alt="Выездная регистрация" loading="lazy"><span>Выездная регистрация</span></button>
+      <button class="tile g5"><img src="https://images.unsplash.com/photo-1517263904808-5dc91e3e7044?w=700&q=75&auto=format&fit=crop" alt="Диско-шары на вечеринке" loading="lazy"><span>Вечеринка</span></button>
+      <button class="tile g6"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=700&q=75&auto=format&fit=crop" alt="Сервировка столов" loading="lazy"><span>Сервировка</span></button>
+      <button class="tile g7"><img src="https://images.unsplash.com/photo-1769812343353-ae6ca1250bc2?w=1200&q=75&auto=format&fit=crop" alt="Стол с канделябром и цветами" loading="lazy"><span>Вечерний банкет</span></button>
+      <button class="tile g8"><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=700&q=75&auto=format&fit=crop" alt="Конфетти" loading="lazy"><span>Детский праздник</span></button>
+    </div>
   </div>
 </section>
 
-<section id="prices">
+<div class="lightbox" id="lb">
+  <button class="lb-btn lb-close" aria-label="Закрыть">×</button>
+  <button class="lb-btn lb-prev" aria-label="Назад">‹</button>
+  <img src="" alt="">
+  <button class="lb-btn lb-next" aria-label="Вперёд">›</button>
+  <p></p>
+</div>
+
+<section class="prices-sec" id="prices">
   <div class="wrap">
-    <span class="eyebrow">Стоимость</span>
-    <h2 class="sec-title">Пакеты оформления</h2>
-    <p class="sec-sub">Цены ориентировочные — точную стоимость рассчитаем после обсуждения.</p>
+    <div class="reveal">
+      <span class="eyebrow">Стоимость</span>
+      <h2 class="sec-title">Пакеты оформления</h2>
+      <p class="sec-sub">Цены ориентировочные — точную стоимость рассчитаем после обсуждения.</p>
+    </div>
     <div class="prices">
-      <div class="price">
+      <div class="price reveal">
         <h3>Лёгкий</h3>
         <div class="sum">от 15 000 ₽</div>
-        <ul>
-          <li>Фотозона или оформление одной зоны</li>
-          <li>Шары или цветочная композиция</li>
-          <li>Доставка и монтаж</li>
-        </ul>
-        <a href="#contact" class="btn btn-ghost">Обсудить</a>
+        <ul><li>Фотозона или оформление одной зоны</li><li>Шары или цветочная композиция</li><li>Доставка и монтаж</li></ul>
+        <a href="#contact" class="btn btn-ghost" data-pack="Лёгкий">Выбрать пакет</a>
       </div>
-      <div class="price hot">
+      <div class="price hot reveal">
         <span class="badge">Популярный</span>
         <h3>Праздник</h3>
         <div class="sum">от 40 000 ₽</div>
-        <ul>
-          <li>Фотозона + оформление зала</li>
-          <li>Декор столов</li>
-          <li>Монтаж и демонтаж</li>
-          <li>Выезд дизайнера</li>
-        </ul>
-        <a href="#contact" class="btn">Обсудить</a>
+        <ul><li>Фотозона + оформление зала</li><li>Декор столов</li><li>Монтаж и демонтаж</li><li>Выезд дизайнера</li></ul>
+        <a href="#contact" class="btn" data-pack="Праздник">Выбрать пакет</a>
       </div>
-      <div class="price">
+      <div class="price reveal">
         <h3>Под ключ</h3>
         <div class="sum">от 90 000 ₽</div>
-        <ul>
-          <li>Полная концепция праздника</li>
-          <li>Оформление всех зон</li>
-          <li>Текстиль, свет, флористика</li>
-          <li>Координатор на площадке</li>
-        </ul>
-        <a href="#contact" class="btn btn-ghost">Обсудить</a>
+        <ul><li>Полная концепция праздника</li><li>Оформление всех зон</li><li>Текстиль, свет, флористика</li><li>Координатор на площадке</li></ul>
+        <a href="#contact" class="btn btn-ghost" data-pack="Под ключ">Выбрать пакет</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="steps-sec">
+<section id="steps">
   <div class="wrap">
-    <span class="eyebrow">Этапы</span>
-    <h2 class="sec-title">Как мы работаем</h2>
-    <p class="sec-sub">Четыре простых шага — и праздник готов.</p>
-    <div class="steps">
-      <div class="step"><h3>Обсуждение идеи</h3><p>Узнаём, какой праздник вы хотите, сколько гостей и какой бюджет. Бесплатно.</p></div>
-      <div class="step"><h3>Подбор декора</h3><p>Готовим концепцию и смету, согласовываем каждую деталь с вами.</p></div>
-      <div class="step"><h3>Монтаж</h3><p>Приезжаем заранее и оформляем площадку. Вам остаётся только прийти на праздник.</p></div>
-      <div class="step"><h3>Демонтаж</h3><p>После праздника аккуратно всё разбираем и увозим.</p></div>
+    <div class="reveal">
+      <span class="eyebrow">Этапы</span>
+      <h2 class="sec-title">Как мы работаем</h2>
+      <p class="sec-sub">Четыре простых шага — и праздник готов.</p>
     </div>
+    <div class="steps">
+      <div class="step reveal"><h3>Обсуждение идеи</h3><p>Узнаём, какой праздник вы хотите, сколько гостей и какой бюджет. Бесплатно.</p></div>
+      <div class="step reveal"><h3>Подбор декора</h3><p>Готовим концепцию и смету, согласовываем каждую деталь с вами.</p></div>
+      <div class="step reveal"><h3>Монтаж</h3><p>Приезжаем заранее и оформляем площадку. Вам остаётся только прийти на праздник.</p></div>
+      <div class="step reveal"><h3>Демонтаж</h3><p>После праздника аккуратно всё разбираем и увозим.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="banner">
+  <div class="wrap reveal">
+    <h2>Не знаете, с чего начать?</h2>
+    <p>Расскажите о празднике — бесплатно подберём идеи оформления под ваш бюджет и пришлём примеры.</p>
+    <a href="#contact" class="btn btn-light">Получить идеи бесплатно</a>
   </div>
 </section>
 
 <section id="faq">
-  <div class="wrap">
-    <span class="eyebrow">Вопросы</span>
-    <h2 class="sec-title">Ответы на частые вопросы</h2>
-    <div class="faq" style="margin-top:36px">
+  <div class="wrap faq-wrap">
+    <div class="reveal">
+      <span class="eyebrow">Вопросы</span>
+      <h2 class="sec-title">Ответы на частые вопросы</h2>
+      <p class="sec-sub">Не нашли ответ? Напишите нам — ответим в течение часа.</p>
+      <a href="#contact" class="btn btn-ghost">Задать вопрос</a>
+    </div>
+    <div class="reveal">
       <details open><summary>За сколько времени нужно бронировать дату?</summary><p>Свадьбы и крупные праздники — лучше за 1–2 месяца. Небольшое оформление иногда делаем и за несколько дней — уточните свободные даты.</p></details>
       <details><summary>Можно оформить праздник по своей идее?</summary><p>Да. Пришлите картинки, которые нравятся, — предложим, как воплотить их в вашем бюджете.</p></details>
       <details><summary>Вы работаете за городом?</summary><p>Да, выезжаем в область. Стоимость выезда зависит от расстояния.</p></details>
@@ -326,24 +428,28 @@
 
 <section class="form-sec" id="contact">
   <div class="wrap">
-    <div>
+    <div class="reveal">
       <span class="eyebrow">Заявка</span>
       <h2 class="sec-title">Обсудим ваш праздник</h2>
       <p class="sec-sub">Оставьте заявку — перезвоним в течение часа и бесплатно подскажем идеи.</p>
+      <div class="contacts-list">
+        <a href="tel:+79000000000"><i>☎</i>+7 (900) 000-00-00</a>
+        <a href="mailto:demo@example.ru"><i>@</i>demo@example.ru</a>
+        <a href="https://t.me/" target="_blank" rel="noopener"><i>TG</i>Написать в Телеграм</a>
+      </div>
     </div>
-    <form id="lead">
+    <form id="lead" class="reveal">
       <div class="fields">
-        <div style="display:grid;gap:14px">
-          <input name="name" placeholder="Ваше имя" required>
-          <input name="phone" type="tel" placeholder="Телефон" required>
-          <input name="date" type="text" placeholder="Дата мероприятия" onfocus="this.type='date'">
-          <select name="type" required>
-            <option value="" disabled selected>Тип мероприятия</option>
-            <option>Свадьба</option><option>День рождения</option><option>Корпоратив</option><option>Фотозона</option><option>Другое</option>
-          </select>
-          <button class="btn" type="submit">Обсудить мероприятие</button>
-          <p class="agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
-        </div>
+        <input name="name" placeholder="Ваше имя" required>
+        <input name="phone" type="tel" placeholder="Телефон" required>
+        <input name="date" type="text" placeholder="Дата мероприятия" onfocus="this.type='date'">
+        <select name="type" id="ftype" required>
+          <option value="" disabled selected>Тип мероприятия</option>
+          <option>Свадьба</option><option>День рождения</option><option>Корпоратив</option><option>Фотозона</option><option>Другое</option>
+        </select>
+        <input name="pack" id="fpack" placeholder="Пакет (необязательно)">
+        <button class="btn" type="submit">Обсудить мероприятие</button>
+        <p class="agree">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
       </div>
       <div class="thanks">
         <h3>Спасибо!</h3>
@@ -359,18 +465,57 @@
       <div>
         <a href="#top" class="logo">Праздник <span style="color:var(--rose)">Декор</span></a>
         <p style="margin-top:8px">Оформление праздников под ключ</p>
+        <div class="soc">
+          <a href="https://vk.com/" target="_blank" rel="noopener" aria-label="ВКонтакте">VK</a>
+          <a href="https://t.me/" target="_blank" rel="noopener" aria-label="Телеграм">TG</a>
+        </div>
       </div>
+      <nav class="foot-menu">
+        <a href="#services">Услуги</a><a href="#works">Работы</a><a href="#prices">Цены</a><a href="#faq">Вопросы</a><a href="#contact">Контакты</a>
+      </nav>
       <div>
         <p><a href="tel:+79000000000">+7 (900) 000-00-00</a></p>
         <p><a href="mailto:demo@example.ru">demo@example.ru</a></p>
-        <div class="soc"><a href="#" aria-label="ВКонтакте">VK</a><a href="#" aria-label="Телеграм">TG</a></div>
       </div>
     </div>
-    <p class="demo">Демонстрационный сайт. Студия вымышленная, контакты и цены — примерные.</p>
+    <p class="demo">Демонстрационный сайт. Студия вымышленная, контакты и цены — примерные. Фото: Unsplash.</p>
   </div>
 </footer>
 
+<a href="#contact" class="float" aria-label="Оставить заявку"><svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg></a>
+
 <script>
+  // шапка становится светлой при прокрутке
+  const hdr = document.getElementById('hdr');
+  const onScroll = () => hdr.classList.toggle('solid', scrollY > 60);
+  addEventListener('scroll', onScroll); onScroll();
+
+  // мобильное меню
+  function toggleMenu(open){ document.getElementById('mobMenu').classList.toggle('open', open); document.body.style.overflow = open ? 'hidden' : ''; }
+  document.querySelectorAll('#mobMenu a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+
+  // появление блоков
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } }), {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // карточки услуг и пакеты подставляют выбор в форму
+  const ftype = document.getElementById('ftype'), fpack = document.getElementById('fpack');
+  document.querySelectorAll('[data-type]').forEach(c => c.addEventListener('click', () => { ftype.value = c.dataset.type; }));
+  document.querySelectorAll('[data-pack]').forEach(b => b.addEventListener('click', () => { fpack.value = 'Пакет «' + b.dataset.pack + '»'; }));
+
+  // галерея с просмотром
+  const tiles = [...document.querySelectorAll('#gallery .tile')];
+  const lb = document.getElementById('lb'), lbImg = lb.querySelector('img'), lbCap = lb.querySelector('p');
+  let cur = 0;
+  function show(i){ cur = (i + tiles.length) % tiles.length; const im = tiles[cur].querySelector('img'); lbImg.src = im.src.replace(/w=\d+/, 'w=1600'); lbImg.alt = im.alt; lbCap.textContent = tiles[cur].querySelector('span').textContent + ' · ' + (cur+1) + ' / ' + tiles.length; lb.classList.add('open'); }
+  tiles.forEach((t, i) => t.addEventListener('click', () => show(i)));
+  lb.querySelector('.lb-close').onclick = () => lb.classList.remove('open');
+  lb.querySelector('.lb-prev').onclick = e => { e.stopPropagation(); show(cur - 1); };
+  lb.querySelector('.lb-next').onclick = e => { e.stopPropagation(); show(cur + 1); };
+  lb.addEventListener('click', e => { if (e.target === lb) lb.classList.remove('open'); });
+  addEventListener('keydown', e => { if (!lb.classList.contains('open')) return; if (e.key === 'Escape') lb.classList.remove('open'); if (e.key === 'ArrowLeft') show(cur - 1); if (e.key === 'ArrowRight') show(cur + 1); });
+
+  // форма
   document.getElementById('lead').addEventListener('submit', function(e){
     e.preventDefault();
     this.querySelector('.fields').style.display = 'none';
